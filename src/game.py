@@ -41,8 +41,50 @@ class Game:
     return card
 
 
-  def player_won(self):
+  def draw_card_for_dealer(self):
+    self.dealer_cards.append(self.draw_card())
+
+
+  def print_dealer_cards(self):
+    print("Dealer cards: ")
+    if len(self.dealer_cards) == 2:
+      print(self.dealer_cards[0], end=" ")
+    else:
+      for card in self.dealer_cards:
+        print(card, end=" ")
+
+    print("")
+
+
+  def player_won(self, is_blackjack = False):
+    if is_blackjack:
+      self.player.add_win(2.5)
+    else:
+      self.player.add_win(2)
     print("You won!")
+
+
+  def player_turn(self):
+    print("Your turn")
+
+    command = 0
+
+    while command != 2:
+      print("Would you like to")
+      print("[1] Draw a card")
+      print("[2] Stay")
+
+      try:
+        command = int(input())
+      except Exception:
+        command = 0
+        pass
+
+      if command == 1:
+        self.player.add_card(self.draw_card())
+        self.player.print_cards()
+
+    return
 
   def start_game(self):
 
@@ -57,8 +99,15 @@ class Game:
       self.player.print_cards()
 
       if self.check_blackjack():
-        self.player_won()
+        self.player_won(True)
         continue
+
+      self.draw_card_for_dealer()
+      self.draw_card_for_dealer()
+
+      self.print_dealer_cards()
+
+      self.player_turn()
 
       break
 

@@ -7,6 +7,9 @@ class Player:
   def add_card(self, card):
     self.cards.append(card)
 
+  def add_win(self, win_multiplier):
+    self.money += (self.current_bet * win_multiplier)
+
   def ask_for_bet(self):
     print("You have {} coins, how much would you like to bet?".format(self.money))
     bet_amount = 0
@@ -26,3 +29,4 @@ class Player:
     print("Your cards: ")
     for card in self.cards:
       print(card, end=" ")
+    print("")
