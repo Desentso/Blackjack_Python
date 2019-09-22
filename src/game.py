@@ -20,7 +20,7 @@ class Game:
     cards = []
     for deck in range(NUMBER_OF_DECKS):
       for region in range(4):
-        for value in range(2, 14):
+        for value in range(2, 15):
           cards.append(Card(region, value))
 
     self.cards = cards
@@ -69,7 +69,7 @@ class Game:
 
     command = 0
 
-    while command != 2:
+    while command != 2 and self.player.total < 21:
       print("Would you like to")
       print("[1] Draw a card")
       print("[2] Stay")
@@ -85,6 +85,9 @@ class Game:
         self.player.print_cards()
 
     return
+
+  def dealer_turn(self):
+
 
   def start_game(self):
 
@@ -108,6 +111,8 @@ class Game:
       self.print_dealer_cards()
 
       self.player_turn()
+
+      self.dealer_turn()
 
       break
 
