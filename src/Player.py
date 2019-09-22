@@ -9,14 +9,14 @@ class Player:
     self.cards.append(card)
     self.total += card.value
     
-    has_14 = False
+    has_11 = False
     for card in self.cards:
-      if card.value == 14:
-        has_14 = True
+      if card.value == 11:
+        has_11 = True
         break
 
-    if (card.value == 14 or has_14) and self.total > 21:
-      self.total -= 13
+    if (card.value == 11 or has_11) and self.total > 21:
+      self.total -= 10
 
   def add_win(self, win_multiplier):
     self.money += (self.current_bet * win_multiplier)

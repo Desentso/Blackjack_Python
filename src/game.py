@@ -12,6 +12,7 @@ class Game:
     self.player = Player(PLAYER_START_MONEY)
 
     self.dealer_cards = []
+    self.dealer_total = 0
 
     self.generate_cards()
 
@@ -42,16 +43,27 @@ class Game:
 
 
   def draw_card_for_dealer(self):
-    self.dealer_cards.append(self.draw_card())
+    card_drawn = self.draw_card()
+    self.dealer_cards.append(card_drawn)
+    self.dealer_total += card_drawn.value
 
+    has_11 = False
+    for card in self.dealer_cards:
+      if card.value == 11:
+        has_11 = True
+        break
 
-  def print_dealer_cards(self):
+    if (card_drawn.value == 11 or has_11) and self.total > 21:
+      self.total -= 10
+
+  def print_dealer_cards(self, show_2):
     print("Dealer cards: ")
-    if len(self.dealer_cards) == 2:
+    if len(self.dealer_cards) == 2 and not show_2:
       print(self.dealer_cards[0], end=" ")
     else:
       for card in self.dealer_cards:
         print(card, end=" ")
+      print("Total: {}".format(self.dealer_total), end=" ")
 
     print("")
 
@@ -86,7 +98,25 @@ class Game:
 
     return
 
+  #def dealer_cards_value(self):
+
+
   def dealer_turn(self):
+    self.print_dealer_cards(True)
+
+    while self.dealer_total < 17:
+      self.draw_card_for_dealer()
+      self.print_dealer_cards(True)
+
+  def check_win(self):
+    if self.dealer_total > 21 and self.player.total <= 21:
+      self.player_won(False)
+    elif self.player.total <= 21 and self.player.total > self.dealer_total:
+      self.player_won(False)
+    elif self.player.total == self.dealer_total:
+      self.player.add_win(1)
+    else:
+      print("Dealer won!")
 
 
   def start_game(self):
@@ -108,11 +138,13 @@ class Game:
       self.draw_card_for_dealer()
       self.draw_card_for_dealer()
 
-      self.print_dealer_cards()
+      self.print_dealer_cards(False)
 
       self.player_turn()
 
       self.dealer_turn()
+
+      self.check_win()
 
       break
 
