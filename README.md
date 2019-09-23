@@ -8,6 +8,13 @@ Command line Blackjack built with Python. It also has fancy ASCII cards.
 ## How to run
 `python src` or `python src/start.py`
 
+## How to run tests
+    cd src
+    python -m unittest
+
+## Rules
+Normal Blackjack rules.
+
 ## Example Game
     > python src/start.py
     Hello, welcome to play Blackjack!
