@@ -9,11 +9,11 @@ Command line Blackjack built with Python. It also has fancy ASCII cards.
 `python src/start.py`
 
 ## Example Game
-    python src/start.py
+    > python src/start.py
     Hello, welcome to play Blackjack!
     You have 100 coins, how much would you like to bet?
     Please enter a number between 1-100.
-    5
+    > 5
     Your cards:
      _________   _________
     |4        | |5        |
@@ -53,7 +53,7 @@ Command line Blackjack built with Python. It also has fancy ASCII cards.
     Would you like to
     [1] Hit
     [2] Stand
-    1
+    > 1
     Your cards:
      _________   _________   _________
     |4        | |5        | |10       |
@@ -69,7 +69,7 @@ Command line Blackjack built with Python. It also has fancy ASCII cards.
     [1] Hit
     [2] Stand
     [3] Double-down
-    2
+    > 2
     Your cards:
      _________   _________   _________
     |4        | |5        | |10       |
@@ -113,3 +113,13 @@ Command line Blackjack built with Python. It also has fancy ASCII cards.
     DEALER WON!
 
     ...
+
+## Card ASCII Art
+     _________   _________   _________   _________   _________   _________   _________
+    |2        | |3        | |10       | |J        | |K        | |Q        | |A        | 
+    |         | |         | |         | |         | |         | |         | |         |
+    |         | |         | |         | |         | |         | |         | |         |
+    |    v    | |    o    | |    &    | |    ^    | |    ^    | |    v    | |    o    |
+    |         | |         | |         | |         | |         | |         | |         |
+    |         | |         | |         | |         | |         | |         | |         |
+    |________2| |________3| |_______10| |________J| |________K| |________Q| |________A|
