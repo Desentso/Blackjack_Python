@@ -1,4 +1,4 @@
-import random, time
+import random, time, sys
 
 from Card import Card, print_cards
 from Player import Player
@@ -6,11 +6,12 @@ from Player import Player
 NUMBER_OF_DECKS = 4
 PLAYER_START_MONEY = 100
 
+
 class Game:
   def __init__(self):
     self.cards = []
     self.player = Player(PLAYER_START_MONEY, "player")
-    self.dealer = Player(0, "dealer")
+    self.dealer = Player(0, "dealer") # Reuse the player class for dealer
 
     self.generate_cards()
 
@@ -23,14 +24,6 @@ class Game:
           cards.append(Card(region, value, value))
 
     self.cards = cards
-
-
-  def check_blackjack(self):
-    summ = 0
-    for card in self.player.cards:
-      summ += card.value
-
-    return summ == 21
 
 
   def draw_card(self):
@@ -57,8 +50,12 @@ class Game:
     while command != 2 and self.player.total < 21:
       self.player.print_cards()
       print("Would you like to")
-      print("[1] Draw a card")
-      print("[2] Stay")
+      print("[1] Hit")
+      print("[2] Stand")
+
+      has_double_down_available = len(self.player.cards) == 3
+      if has_double_down_available:
+        print("[3] Double-down")
 
       try:
         command = int(input())
@@ -68,6 +65,11 @@ class Game:
 
       if command == 1:
         self.player.add_card(self.draw_card())
+      elif has_double_down_available and command == 3:
+        self.player.money -= self.player.current_bet
+        self.player.current_bet += self.player.current_bet
+        print("You double-down, new bet: {}".format(self.player.current_bet))
+        break
 
     self.player.print_cards()
     if self.player.total > 21:
@@ -99,6 +101,21 @@ class Game:
       print("DEALER WON!\n")
 
 
+  def almost_out_of_cards(self):
+
+    command = ""
+    while command not in ["s", "q"]:
+      print("Almost out of cards.")
+      print("Would you like to")
+      print("[s] Reshuffle cards")
+      print("[q] Quit")
+      command = input()
+
+    if command == "s":
+      self.generate_cards()
+    else:
+      sys.exit()
+
   def end_of_round(self):
     self.player.reset()
     self.dealer.reset()
@@ -112,7 +129,7 @@ class Game:
 
     self.player.print_cards()
 
-    if self.check_blackjack():
+    if self.player.has_blackjack():
       print("BLACKJACK!")
       self.player_won(True)
       self.end_of_round()
@@ -131,6 +148,9 @@ class Game:
     print("Hello, welcome to play Blackjack!")
 
     while self.player.money > 0:
+
+      if len(self.cards) < 20:
+        self.almost_out_of_cards()
 
       got_blackjack = self.start_of_round()
 
@@ -155,6 +175,7 @@ class Game:
 
       self.end_of_round()
 
+    print("GAME OVER! You lost all of your coins!")
 
 if __name__ == "__main__":
   game = Game()

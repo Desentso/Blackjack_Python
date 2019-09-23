@@ -30,6 +30,9 @@ class Player:
       has_11.value = 1
       self.total -= 10
 
+  def has_blackjack(self):
+    return self.total == 21
+
   def add_win(self, win_multiplier):
     self.money += int(self.current_bet * win_multiplier)
 
