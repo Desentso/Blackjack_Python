@@ -1,9 +1,12 @@
+from Card import print_cards
+
 class Player:
-  def __init__(self, start_money):
+  def __init__(self, start_money, player_type):
     self.money = start_money
     self.cards = []
     self.current_bet = 0
     self.total = 0
+    self.player_type = player_type
 
   def reset(self):
     self.cards = []
@@ -46,10 +49,16 @@ class Player:
     self.current_bet = bet_amount
     return bet_amount
 
-  def print_cards(self):
-    print("Your cards: ")
-    total = 0
-    for card in self.cards:
-      print(card, end=" ")
-    print("Total: {}".format(self.total), end=" ")
+  def print_cards(self, show_2 = True):
+    if self.player_type == "player":
+      print("Your cards: ")
+    else:
+      print("Dealer's cards: ")
+
+    if len(self.cards) == 2 and not show_2:
+      print_cards(self.cards[0:1], True)
+    else:
+      print_cards(self.cards)
+      print("Total: {}".format(self.total), end=" ")
+
     print("\n")
