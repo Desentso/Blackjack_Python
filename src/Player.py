@@ -8,10 +8,12 @@ class Player:
     self.total = 0
     self.player_type = player_type
 
+
   def reset(self):
     self.cards = []
     self.current_bet = 0
     self.total = 0
+
 
   def add_card(self, card):
     self.cards.append(card)
@@ -30,11 +32,14 @@ class Player:
       has_11.value = 1
       self.total -= 10
 
+
   def has_blackjack(self):
     return self.total == 21
 
+
   def add_win(self, win_multiplier):
     self.money += int(self.current_bet * win_multiplier)
+
 
   def ask_for_bet(self):
     print("You have {} coins, how much would you like to bet?".format(self.money))
@@ -51,6 +56,7 @@ class Player:
     self.money -= bet_amount
     self.current_bet = bet_amount
     return bet_amount
+
 
   def print_cards(self, show_2 = True):
     if self.player_type == "player":

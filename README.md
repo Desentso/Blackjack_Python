@@ -6,7 +6,7 @@ Command line Blackjack built with Python. It also has fancy ASCII cards.
 > Python 3.x+ (tested on Python 3.5)
 
 ## How to run
-`python src/start.py`
+`python src` or `python src/start.py`
 
 ## Example Game
     > python src/start.py
@@ -115,8 +115,18 @@ Command line Blackjack built with Python. It also has fancy ASCII cards.
     ...
 
 ## Card ASCII Art
+
+     _________
+    |2        |
+    |         |
+    |         |
+    |    v    |
+    |         |
+    |         |
+    |________2| 
+
      _________   _________   _________   _________   _________   _________   _________
-    |2        | |3        | |10       | |J        | |K        | |Q        | |A        | 
+    |2        | |3        | |10       | |J        | |K        | |Q        | |A        |
     |         | |         | |         | |         | |         | |         | |         |
     |         | |         | |         | |         | |         | |         | |         |
     |    v    | |    o    | |    &    | |    ^    | |    ^    | |    v    | |    o    |

@@ -41,7 +41,7 @@ def print_cards(cards, has_hidden_card = False):
       "|_________|",
     ])
 
-  for i in range(8):
+  for i in range(len(card_strs[0])):
     for card in card_strs:
       print(card[i], end=" ")
 
@@ -51,13 +51,14 @@ class Card:
 
   def __init__(self, region, value, key):
     self.region = region
-    if value == 14:
+    if value == 14: # Ace's value is 11
       self.value = 11
-    elif value > 10:
+    elif value > 10: # Jack, Queen and King all have value 10
       self.value = 10
     else:
       self.value = value
     self.key = key
+
 
   def __str__(self):
     space = "_"
