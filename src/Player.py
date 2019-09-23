@@ -5,6 +5,11 @@ class Player:
     self.current_bet = 0
     self.total = 0
 
+  def reset(self):
+    self.cards = []
+    self.current_bet = 0
+    self.total = 0
+
   def add_card(self, card):
     self.cards.append(card)
     self.total += card.value
@@ -12,14 +17,18 @@ class Player:
     has_11 = False
     for card in self.cards:
       if card.value == 11:
-        has_11 = True
+        has_11 = card
         break
 
-    if (card.value == 11 or has_11) and self.total > 21:
+    if card.value == 11 and self.total > 21:
+      card.value = 1
+      self.total -= 10
+    elif has_11 and self.total > 21:
+      has_11.value = 1
       self.total -= 10
 
   def add_win(self, win_multiplier):
-    self.money += (self.current_bet * win_multiplier)
+    self.money += int(self.current_bet * win_multiplier)
 
   def ask_for_bet(self):
     print("You have {} coins, how much would you like to bet?".format(self.money))
@@ -33,6 +42,7 @@ class Player:
         bet_amount = 0
         pass
     
+    self.money -= bet_amount
     self.current_bet = bet_amount
     return bet_amount
 
@@ -42,4 +52,4 @@ class Player:
     for card in self.cards:
       print(card, end=" ")
     print("Total: {}".format(self.total), end=" ")
-    print("")
+    print("\n")
