@@ -1,6 +1,6 @@
 # Blackjack
 
-Command line Blackjack built with Python. It also has fancy ASCII cards.
+Command line Blackjack built with Python. It also has fancy ASCII cards. [Design Document](https://github.com/Desentso/Blackjack_Python/blob/master/README.md)
 
 ## Requirements
 > Python 3.x+ (tested on Python 3.5)
