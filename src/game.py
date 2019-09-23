@@ -176,8 +176,3 @@ class Game:
       self.end_of_round()
 
     print("GAME OVER! You lost all of your coins!")
-
-if __name__ == "__main__":
-  game = Game()
-  game.start_game()
-  pass
